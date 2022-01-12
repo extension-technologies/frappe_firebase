@@ -4,5 +4,5 @@
 # import frappe
 import unittest
 
-class TestFirebaseSettings(unittest.TestCase):
+class TestFirebaseServiceAccountSettings(unittest.TestCase):
 	pass

@@ -4,5 +4,5 @@
 # import frappe
 from frappe.model.document import Document
 
-class FirebaseSettings(Document):
+class FirebaseServiceAccountSettings(Document):
 	pass
