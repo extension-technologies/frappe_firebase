@@ -5,7 +5,7 @@ from frappe_firebase.config.firebase_settings import getCred
 import frappe
 from frappe_firebase.frappe_firebase.doctype.firebase_logs.firebase_logs import frappe_log
 
-def init_app(app):
+def init_app():
     if (len(firebase_admin._apps) == 0):
         firebase_admin.initialize_app(Certificate(getCred()))
     
