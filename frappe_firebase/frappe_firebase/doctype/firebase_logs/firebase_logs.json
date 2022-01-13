@@ -1,0 +1,56 @@
+{
+ "actions": [],
+ "creation": "2022-01-12 18:34:38.302570",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "log_title",
+  "log_message",
+  "reference"
+ ],
+ "fields": [
+  {
+   "fieldname": "log_title",
+   "fieldtype": "Data",
+   "label": "Log Title",
+   "read_only": 1
+  },
+  {
+   "fieldname": "log_message",
+   "fieldtype": "Small Text",
+   "label": "Log Message",
+   "read_only": 1
+  },
+  {
+   "fieldname": "reference",
+   "fieldtype": "Text",
+   "label": "Reference",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-01-13 10:20:26.167232",
+ "modified_by": "Administrator",
+ "module": "Frappe Firebase",
+ "name": "Firebase Logs",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

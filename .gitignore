@@ -4,3 +4,4 @@
 *.swp
 tags
 frappe_firebase/docs/current
+frappe_firebase/config/firebase_settings.py
