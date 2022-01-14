@@ -1,3 +1,4 @@
+from email import message
 import firebase_admin
 from firebase_admin import messaging
 from firebase_admin.credentials import Certificate
@@ -23,6 +24,25 @@ def send_notification(data, topic):
         )
     )
     response = messaging.send(message)
+    frappe_log('Firebase Message', 'Message sent', response)
+
+def send_all_notification(data):
+    doc = frappe.get_doc('Firebase Service Account Settings')
+    if(doc.get('enable_push_notifications') == 0):
+        return frappe_log('Firebase Service Account Settings', 'Push notifications are disabled', 'send_notification')
+    init_app()
+    message_list = data.get('message_list')
+    message_instance_list = []
+    for message in message_list:
+        message_instance = messaging.Message(
+            topic=message.get('topic'),
+            notification=messaging.Notification(
+                body=message.get('message'),
+                title=message.get('title')
+            )
+        )
+        message_instance_list.append(message_instance)
+    response = messaging.send_all(message_instance_list)
     frappe_log('Firebase Message', 'Message sent', response)
 
 def send():
