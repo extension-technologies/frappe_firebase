@@ -10,7 +10,10 @@
   "message",
   "section_break_4",
   "topic",
-  "amended_from"
+  "amended_from",
+  "image",
+  "additional_info_section",
+  "properties"
  ],
  "fields": [
   {
@@ -48,12 +51,30 @@
    "options": "Firebase Message",
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "fieldname": "image",
+   "fieldtype": "Attach Image",
+   "hidden": 1,
+   "label": "Image"
+  },
+  {
+   "fieldname": "additional_info_section",
+   "fieldtype": "Section Break",
+   "label": "Additional Info"
+  },
+  {
+   "fieldname": "properties",
+   "fieldtype": "Table",
+   "label": "Properties",
+   "options": "Firebase Message Properties"
   }
  ],
+ "image_field": "image",
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-01-13 10:15:53.759868",
+ "modified": "2022-01-19 18:37:05.916784",
  "modified_by": "Administrator",
  "module": "Frappe Firebase",
  "name": "Firebase Message",

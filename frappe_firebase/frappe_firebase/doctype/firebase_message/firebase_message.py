@@ -13,10 +13,14 @@ class FirebaseMessage(Document):
 		if (firebase_settings.get('enable_push_notifications') == 0):
 			frappe.throw('Push notifications are disabled')
 			return frappe_log('Firebase Service Account Settings', 'Push notifications are disabled', 'send_notification')
-		data = {
-			'title': self.title,
-			'body': self.message,
-		}
-		send_notification(data, self.topic)
+		additional_data = {}
+		for property in self.properties:
+			additional_data[property.key] = property.value
+		send_notification(
+			title=self.title,
+			body=self.message,
+			topic=self.topic,
+			additional_data=additional_data
+		)
 	def before_cancel(self):
 		frappe.msgprint('Cancelling this message will not cancel the notification sent to the topic')
