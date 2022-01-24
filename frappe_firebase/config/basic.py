@@ -11,7 +11,7 @@ def init_app():
         firebase_admin.initialize_app(Certificate(getCred()))
     
 
-def send_notification(data, topic):
+def send_notification(title, body, topic, additional_data=None):
     doc = frappe.get_doc('Firebase Service Account Settings')
     if(doc.get('enable_push_notifications') == 0):
         return frappe_log('Firebase Service Account Settings', 'Push notifications are disabled', 'send_notification')
@@ -19,30 +19,12 @@ def send_notification(data, topic):
     message = messaging.Message(
         topic=topic,
         notification=messaging.Notification(
-            body=data.get("body"),
-            title=data.get("title")
-        )
+            body=body,
+            title=title
+        ),
+        data=additional_data
     )
     response = messaging.send(message)
-    frappe_log('Firebase Message', 'Message sent', response)
-
-def send_all_notification(data):
-    doc = frappe.get_doc('Firebase Service Account Settings')
-    if(doc.get('enable_push_notifications') == 0):
-        return frappe_log('Firebase Service Account Settings', 'Push notifications are disabled', 'send_notification')
-    init_app()
-    message_list = data.get('message_list')
-    message_instance_list = []
-    for message in message_list:
-        message_instance = messaging.Message(
-            topic=message.get('topic'),
-            notification=messaging.Notification(
-                body=message.get('message'),
-                title=message.get('title')
-            )
-        )
-        message_instance_list.append(message_instance)
-    response = messaging.send_all(message_instance_list)
     frappe_log('Firebase Message', 'Message sent', response)
 
 def send():
