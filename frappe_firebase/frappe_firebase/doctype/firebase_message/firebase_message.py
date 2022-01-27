@@ -1,7 +1,6 @@
 # Copyright (c) 2022, Vinay Rawat and contributors
 # For license information, please see license.txt
 
-# import frappe
 import frappe
 from frappe.model.document import Document
 from frappe_firebase.config.basic import send_notification
