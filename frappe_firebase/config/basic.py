@@ -11,13 +11,14 @@ def init_app():
         firebase_admin.initialize_app(Certificate(getCred()))
     
 
-def send_notification(title, body, topic, additional_data=None):
+def send_notification(title, body, topic, additional_data=None, fcm_token=None):
     doc = frappe.get_doc('Firebase Service Account Settings')
     if(doc.get('enable_push_notifications') == 0):
         return frappe_log('Firebase Service Account Settings', 'Push notifications are disabled', 'send_notification')
     init_app()
     message = messaging.Message(
-        topic=topic,
+        topic=topic if fcm_token is None else None,
+        token=fcm_token,
         notification=messaging.Notification(
             body=body,
             title=title

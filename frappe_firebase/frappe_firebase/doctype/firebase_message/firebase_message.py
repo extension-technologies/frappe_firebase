@@ -19,17 +19,19 @@ class FirebaseMessage(Document):
 			title=self.title,
 			body=self.message,
 			topic=self.topic,
+			fcm_token=self.fcm_token,
 			additional_data=additional_data
 		)
 	def before_cancel(self):
 		frappe.msgprint('Cancelling this message will not cancel the notification sent to the topic')
 
 @frappe.whitelist()
-def create_notification(title, message, topic, key_value_data=None, send_now=False):
+def create_notification(title, message, topic=None, key_value_data=None, send_now=False, fcm_token=None):
 	doc = frappe.new_doc("Firebase Message", {})
 	doc.title = title
 	doc.message = message
 	doc.topic = topic
+	doc.fcm_token = fcm_token
 	if (send_now == True):
 		doc.docstatus = 1
 	if key_value_data:

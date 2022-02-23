@@ -10,6 +10,7 @@
   "message",
   "section_break_4",
   "topic",
+  "fcm_token",
   "amended_from",
   "image",
   "additional_info_section",
@@ -68,13 +69,18 @@
    "fieldtype": "Table",
    "label": "Properties",
    "options": "Firebase Message Properties"
+  },
+  {
+   "fieldname": "fcm_token",
+   "fieldtype": "Small Text",
+   "label": "FCM Token"
   }
  ],
  "image_field": "image",
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-01-19 18:37:05.916784",
+ "modified": "2022-02-17 13:33:49.494593",
  "modified_by": "Administrator",
  "module": "Frappe Firebase",
  "name": "Firebase Message",
