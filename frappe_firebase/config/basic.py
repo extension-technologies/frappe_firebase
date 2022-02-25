@@ -25,7 +25,10 @@ def send_notification(title, body, topic=None, additional_data=None, fcm_token=N
         ),
         data=additional_data
     )
-    response = messaging.send(message)
+    try:
+        response = messaging.send(message)
+    except Exception as e:
+        frappe_log('Unable to send notification', message, e)
     # frappe_log('Firebase Message', 'Message sent', response)
 
 def send():
