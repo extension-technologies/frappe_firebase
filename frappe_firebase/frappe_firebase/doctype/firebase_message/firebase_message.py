@@ -27,17 +27,31 @@ class FirebaseMessage(Document):
 
 @frappe.whitelist()
 def create_notification(title, message, topic=None, key_value_data=None, send_now=False, fcm_token=None):
-	doc = frappe.new_doc("Firebase Message", {})
-	doc.title = title
-	doc.message = message
-	doc.topic = topic
-	doc.fcm_token = fcm_token
-	if (send_now == True):
-		doc.docstatus = 1
-	if key_value_data:
-		for key_value in key_value_data:
-			doc.append('properties', {
-				"key": key_value.get('key'),
-				"value": key_value.get('value')
-			})
-	doc.insert(ignore_permissions=True)
+	# doc = frappe.new_doc("Firebase Message", {})
+	# doc.title = title
+	# doc.message = message
+	# doc.topic = topic
+	# doc.fcm_token = fcm_token
+	# if (send_now == True):
+	# 	doc.docstatus = 1
+	# if key_value_data:
+	# 	for key_value in key_value_data:
+	# 		doc.append('properties', {
+	# 			"key": key_value.get('key'),
+	# 			"value": key_value.get('value')
+	# 		})
+	# doc.insert(ignore_permissions=True)
+	firebase_settings = frappe.get_doc('Firebase Service Account Settings')
+	if (firebase_settings.get('enable_push_notifications') == 0):
+		frappe.throw('Push notifications are disabled')
+		return frappe_log('Firebase Service Account Settings', 'Push notifications are disabled', 'send_notification')
+	try:
+		send_notification(
+			title=title,
+			body=message,
+			topic=topic,
+			fcm_token=fcm_token,
+			additional_data=key_value_data
+		)
+	except Exception as e:
+		frappe_log('Unable to create notification',frappe.get_traceback(), e)
